@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#244d40">
+  <meta name="description" content="A little structure for your creative process. Organize architecture studio projects, tasks, and design notes in your browser.">
+  <title>Studio Companion</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23244d40'/%3E%3Cpath d='M10 29V15L20 9l10 6v14H10m10-20v20M10 15l10 6 10-6' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="files.css"><script src="pdf-preview.js" defer></script><link rel="stylesheet" href="security.css"><script src="vault.js" defer></script><script src="files.js" defer></script><script src="app.js" defer></script><script src="security.js" defer></script>
+</head>
+<body>
+<section id="welcome-screen" class="welcome-screen" aria-label="Welcome to Studio Companion">
+  <div class="welcome-story">
+    <div class="welcome-brand"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M8 30V14L20 7l12 7v16H8ZM20 7v23M8 14l12 7 12-7" stroke="currentColor" stroke-width="1.5"/></svg><span>studio companion.</span></div>
+    <div class="welcome-copy"><span class="eyebrow">YOUR IDEAS. YOUR PROCESS. YOUR SPACE.</span><h1>Welcome to<br>your studio.</h1><p>A quiet place for ambitious ideas.<br>Keep your projects, thoughts, and next steps together.</p><div class="welcome-features"><span>▱ Studio projects</span><span>☑ Small steps</span><span>▤ Design notes</span></div></div>
+    <svg class="welcome-sketch" viewBox="0 0 380 230" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1"><path d="M20 168 172 224 354 139 200 82Z"/><path d="m75 143 92 37 125-60-94-37Z"/><path d="M75 143V72l92 37v71m0-71 125-59v70M75 72l123-60 94 38M198 12v71M100 153V82l27 11v71m73-1v-49l32-15v48m25-12V86l20-9v49M75 121l92 37 125-59"/><path d="M47 75v69m-4-72 8 4m-8 66 8 4m115 52 126-60m-129 56 7 9m119-69 7 9" stroke-dasharray="3 3"/><path d="M318 168v-31m0 14c-26-7-20-26-8-28-1-21 21-22 25-8 18 5 14 30-17 36M26 198h42"/></g></svg>
+    <div class="welcome-footer">From first sketch to final crit. One idea at a time.</div>
+  </div>
+  <div class="account-panel"><div class="account-card">
+    <span class="eyebrow">A LITTLE SPACE TO CREATE</span><h2 id="account-title">Opening your studio…</h2><p id="account-subtitle" class="muted">Your workspace stays on this device.</p>
+    <form id="account-form">
+      <label for="account-username">Username</label><input id="account-username" name="username" required minlength="3" maxlength="40" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Choose your studio username">
+      <label for="account-password">Password</label><input id="account-password" name="password" type="password" required maxlength="256" autocomplete="current-password" placeholder="Enter your password">
+      <div id="password-confirm-row" hidden><p class="password-hint">Use at least 12 characters. A memorable passphrase works well.</p><label for="account-confirm">Confirm password</label><input id="account-confirm" type="password" maxlength="256" autocomplete="new-password" placeholder="Enter it once more"></div>
+      <label class="show-password-label"><input id="show-account-password" type="checkbox">Show password</label>
+      <button id="account-submit" class="button primary" type="submit" disabled>Open my studio ↗</button><p id="account-error" class="account-error" role="status" aria-live="polite"></p>
+    </form>
+    <p id="setup-note" class="setup-note" hidden>Existing projects and files will be encrypted with your password. Close older Studio Companion windows before continuing. Keep your password safe: there is no email reset or recovery backdoor.</p>
+    <p id="login-note" class="setup-note" hidden>Forgot your password? This local account has no password reset. You’ll need the password used to protect this workspace or an older backup you can unlock.</p>
+    <div class="local-account-note"><strong>Your studio stays yours.</strong>This is a local account, not a cloud sign-in. Projects and attachments are encrypted on this device. Your browser and Windows app have separate workspaces.</div>
+  </div></div>
+</section>
+
+  <dialog class="sidebar" id="workspace-menu" aria-label="Workspace menu"><div class="menu-heading">
+    <a class="brand" href="#overview" aria-label="Studio Companion home"><span class="brand-mark"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M8 30V14L20 7l12 7v16H8ZM20 7v23M8 14l12 7 12-7" stroke="currentColor" stroke-width="1.5"/></svg></span><span>studio<span class="brand-second">companion<span class="brand-dot">.</span></span></span></a>
+<button id="menu-close" class="icon-button" aria-label="Close menu">×</button></div>
+    <div class="workspace-label">YOUR WORKSPACE</div>
+    <nav aria-label="Main navigation">
+      <a href="#overview" data-nav="overview"><span class="nav-icon">◫</span> Overview</a>
+      <a href="#projects" data-nav="projects"><span class="nav-icon">▱</span> Studio projects <span id="nav-count" class="nav-count">0</span></a>
+      <a href="#notes" data-nav="notes"><span class="nav-icon">▤</span> Design notes</a>
+    </nav>
+    <div class="sidebar-bottom"><div class="studio-tip"><span class="tiny-label">A NOTE TO SELF</span><p>Good design starts<br>with a little space<br>to think.</p><span class="sketch-line"></span></div><div class="storage-info"><span class="status-dot"></span><div><strong id="save-status">Saved in this browser</strong><small>Your own little corner of the studio.</small></div></div><div class="backup-actions"><button class="text-button backup" id="export-button">↓ Export backup</button><button class="text-button backup" data-action="import">↑ Import backup</button></div></div>
+<div class="account-menu"><button id="change-password">Change password</button><button id="lock-workspace">Log out &amp; lock</button></div><p class="security-note">Encrypted on this device. Locks after 10 minutes without activity.</p></dialog>
+  <div class="shell">
+    <header class="topbar"><span id="breadcrumb">Workspace <span>/</span> Overview</span><div class="topbar-right"><span id="today-label"></span><button class="menu-toggle" id="menu-toggle" aria-label="Open workspace menu" aria-controls="workspace-menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Menu</span></button></div></header>
+    <main id="main"></main>
+    <footer><span>Studio Companion <span class="footer-dot">·</span> Made for the process.</span><span class="mobile-storage">Stored in this browser · <button class="text-button" data-action="export">Export backup</button><button class="text-button" data-action="import">Import backup</button></span><span>One idea at a time.</span></footer>
+  </div>
+  <dialog id="project-dialog" aria-labelledby="project-dialog-title"><form id="project-form"><div class="dialog-heading"><span class="eyebrow">MAKE ROOM FOR AN IDEA</span><button type="button" class="icon-button" data-close aria-label="Close dialog">×</button></div><h2 id="project-dialog-title">A new studio project</h2><p class="muted">Start with a name and a deadline. Build from there.</p><label for="project-name">Project name</label><input id="project-name" name="name" required maxlength="100" placeholder="e.g. A courtyard for the community" autocomplete="off"><label for="project-deadline">Deadline</label><input id="project-deadline" name="deadline" type="date" required><div class="dialog-actions"><button type="button" class="button secondary" data-close>Cancel</button><button class="button primary" type="submit">Create project <span>↗</span></button></div></form></dialog>
+  <dialog id="note-dialog" aria-labelledby="note-dialog-title"><form id="note-form"><div class="dialog-heading"><span class="eyebrow">CAPTURE THE PROCESS</span><button type="button" class="icon-button" data-close aria-label="Close dialog">×</button></div><h2 id="note-dialog-title">A design note</h2><p class="muted">An observation, a question, or your next big idea.</p><label for="note-project">Studio project</label><select id="note-project" name="project" required></select><label for="note-date">Date</label><input id="note-date" name="date" type="date" required><label for="note-text">Your note</label><textarea id="note-text" name="text" required maxlength="10000" rows="6" placeholder="What are you thinking about?"></textarea><div class="dialog-actions"><button type="button" class="button secondary" data-close>Cancel</button><button class="button primary" type="submit">Save note <span>↗</span></button></div></form></dialog>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title"><form method="dialog"><h2 id="confirm-title">Delete this project?</h2><p id="confirm-description" class="muted"></p><div class="dialog-actions"><button class="button secondary" value="cancel">Keep it</button><button class="button danger" value="delete">Delete project</button></div></form></dialog>
+<input type="file" id="backup-input" accept=".json,application/json" hidden aria-label="Choose a Studio Companion backup">
+  <dialog id="import-dialog" aria-labelledby="import-title"><h2 id="import-title">Bring your workspace with you</h2><p class="muted">Import projects, notes, tasks, and attachments from a Studio Companion backup.</p><div id="import-summary" class="import-summary"></div><p id="import-error" class="import-error" role="alert"></p><div class="dialog-actions"><button class="button secondary" data-close>Cancel</button><button class="button primary" id="import-confirm">Import backup</button></div></dialog>
+<dialog id="password-dialog" aria-labelledby="password-title"><form id="password-form"><div class="dialog-heading"><span class="eyebrow">YOUR PRIVATE WORKSPACE</span><button type="button" class="icon-button" data-close aria-label="Close password settings">×</button></div><h2 id="password-title">Change your password</h2><p class="muted">Your projects and files stay in place. Backups you already exported keep their original password.</p><label for="current-password">Current password</label><input id="current-password" type="password" autocomplete="current-password" required maxlength="256"><label for="new-password">New password</label><input id="new-password" type="password" autocomplete="new-password" required minlength="12" maxlength="256"><label for="confirm-new-password">Confirm new password</label><input id="confirm-new-password" type="password" autocomplete="new-password" required minlength="12" maxlength="256"><p id="password-error" class="account-error" role="status"></p><div class="dialog-actions"><button type="button" class="button secondary" data-close>Cancel</button><button id="password-save" type="submit" class="button primary">Update password</button></div></form></dialog>
+<dialog id="backup-unlock-dialog" aria-labelledby="backup-unlock-title"><form method="dialog"><h2 id="backup-unlock-title">Unlock this backup</h2><p class="backup-password-help">Enter the workspace password that was in use when this backup was exported. It may differ from your current password.</p><label for="backup-password">Backup password</label><input id="backup-password" type="password" autocomplete="off" required maxlength="256"><div class="dialog-actions"><button type="submit" formnovalidate value="cancel" class="button secondary">Cancel</button><button type="submit" value="unlock" class="button primary">Unlock backup</button></div></form></dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <noscript><p>Please enable JavaScript to use your studio workspace.</p></noscript>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# Local workspace protection
+
+Studio Companion 1.2 uses a local encrypted vault, not a server login. Each browser origin/profile and the Windows app has its own account and workspace. There is no cloud synchronization, email verification, remote recovery, or administrator reset. Losing the password means losing access unless you have an older backup and its password. Do not clear app/browser data without keeping a usable backup.
+
+Projects, tasks, notes, attachment names, and attachment bytes are encrypted in IndexedDB using AES-256-GCM. Each encryption uses a fresh random 96-bit IV and authenticated context. A random workspace key is wrapped with a key derived from the password using PBKDF2-HMAC-SHA-256, 600,000 iterations, and a random 128-bit salt. Passwords and unwrapped keys are not persisted; active Web Crypto keys are non-extractable. The username, random record/project identifiers, record counts, ciphertext lengths, and derivation parameters are not secret.
+
+First-run migration commits the encrypted workspace and files together before clearing legacy active storage. If encryption fails, legacy data is kept. If cleanup fails after commit, login with the newly chosen password retries cleanup. Old backups, filesystem/browser snapshots, and recoverable database history are not securely erased by this update.
+
+Logout clears rendered project content, forms, previews, and object URLs, drains pending storage writes, and drops the active key reference. Sessions lock after 10 minutes of inactivity, on reopen/reload, or when requested from the menu. Web Locks prevents simultaneous tabs using the same workspace in this version. Close older versions before migration; they do not participate in this protection.
+
+New JSON backups encrypt their payload, including attachment data. Each backup carries the wrapped key and derivation settings from export time; changing the current password does not re-key old backup files. Legacy plaintext backups remain supported for import. Imports commit the incoming files and combined workspace atomically. Downloads of individual original files remain ordinary plaintext files.
+
+This protects stored content from casual access and copying the vault without its password. A strong unique passphrase matters because offline guessing is possible. It does not protect an unlocked session, screenshots, a compromised browser/extension or operating system, injected application code, or someone who can modify the app and capture a future password. JavaScript cannot guarantee erasure of every memory copy. The UI retry delay is not an offline attack defense. Use your operating system's account protection and disk encryption as appropriate. The app is a locally built, unsigned executable, not a security-audited product.
+
+Tests use synthetic workspaces and fake IndexedDB. They cover migration, failed migration, cleanup recovery, incorrect credentials, queued writes during lock, ciphertext tampering, password changes, encrypted backups, and atomic imports. UI verification uses a separate localhost port; no password is assigned to the user's Windows workspace.

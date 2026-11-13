@@ -1,0 +1,17 @@
+{
+  "name": "studio-companion",
+  "version": "1.2.0",
+  "private": true,
+  "description": "A local architecture studio planner with project attachments and a Windows app.",
+  "scripts": {
+    "start": "node serve.cjs",
+    "build:pdf": "node scripts/build-pdf.cjs",
+    "check": "node --check dist/app.js && node --check dist/files.js && node --check dist/vault.js && node --check dist/security.js",
+    "test": "node --test tests/vault.test.cjs"
+  },
+  "devDependencies": {
+    "fake-indexeddb": "6.2.8",
+    "pdfjs-dist": "6.5.438",
+    "esbuild": "0.25.12"
+  }
+}

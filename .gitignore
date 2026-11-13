@@ -1,0 +1,7 @@
+node_modules/
+*.log
+.sites-runtime/
+desktop/bin/
+desktop/obj/
+release/
+tests/fixtures/
